@@ -26,3 +26,17 @@ figure(5)
 imagesc(img_seg),title('Image segmentée'),colorbar;
 
 img_num = numerotation(img_seg);
+
+imshow(img_seuil); title('Image filtrée');
+
+img_ero1=filtreEro(img_seuil, 3);
+img_ero2=filtreEro(img_ero1, 3);
+img_ero3=filtreEro(img_ero2, 3);
+img_ero4=filtreEro(img_ero3, 3);
+img_ero=filtreEro(img_ero4, 3);
+figure(5)
+imshow(img_ero); title('Image Erodée');
+
+img_dilat=filtreDilat(img_ero, 3);
+figure(6)
+imshow(img_dilat); title('Image Dilatée');
