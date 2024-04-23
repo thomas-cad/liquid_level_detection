@@ -1,8 +1,8 @@
 clear all;
 close all;
 
-img = imread('img_test.jpg');
-img = imresize(img, [700 500]);
+img = imread('img_test_accuracy.jpg');
+img = imresize(img, [500 500]);
 figure(1)
 imshow(img); title('Image origniale');
 
@@ -18,3 +18,15 @@ seuil=90
 img_seuil=255*(img_moy<seuil);
 figure(4)
 imshow(img_seuil); title('Image filtrée');
+
+img_ero1=filtreEro(img_seuil, 3);
+img_ero2=filtreEro(img_ero1, 3);
+img_ero3=filtreEro(img_ero2, 3);
+img_ero4=filtreEro(img_ero3, 3);
+img_ero=filtreEro(img_ero4, 3);
+figure(5)
+imshow(img_ero); title('Image Erodée');
+
+img_dilat=filtreDilat(img_ero, 3);
+figure(6)
+imshow(img_dilat); title('Image Dilatée');
