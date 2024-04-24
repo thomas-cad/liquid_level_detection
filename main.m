@@ -19,24 +19,24 @@ img_seuil=255*(img_moy<seuil);
 figure(4)
 imshow(img_seuil); title('Image seuillée');
 
-% Erosion + Dilatation
-
-img_seg = segmentation(img_seuil);
+img_dilat1=filtreDilat(img_seuil, 3);
+img_dilat2=filtreDilat(img_dilat1, 3);
+img_dilat3=filtreDilat(img_dilat2, 3);
+img_dilat4=filtreDilat(img_dilat3, 3);
 figure(5)
-imagesc(img_seg),title('Image segmentée'),colorbar;
+imshow(img_dilat4); title('Image Dilatée');
 
-img_num = numerotation(img_seg);
-
-imshow(img_seuil); title('Image filtrée');
-
-img_ero1=filtreEro(img_seuil, 3);
+img_ero1=filtreEro(img_dilat4, 3);
 img_ero2=filtreEro(img_ero1, 3);
 img_ero3=filtreEro(img_ero2, 3);
 img_ero4=filtreEro(img_ero3, 3);
-img_ero=filtreEro(img_ero4, 3);
-figure(5)
-imshow(img_ero); title('Image Erodée');
-
-img_dilat=filtreDilat(img_ero, 3);
+img_ero5=filtreEro(img_ero4, 3);
+img_ero6=filtreEro(img_ero5, 3);
 figure(6)
-imshow(img_dilat); title('Image Dilatée');
+imshow(img_ero6); title('Image Erodée');
+
+img_seg = segmentation(img_ero6);
+figure(7)
+imagesc(img_seg),title('Image segmentée'),colorbar;
+
+img_num = numerotation(img_seg);

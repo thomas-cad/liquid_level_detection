@@ -28,9 +28,6 @@ for i=2:taillex
     end
 end
 
-figure(10)
-imagesc(img_seg1),title('segmented 1st step'),colorbar;colormap('jet');
-
 
 % 2eme étape de segmentation
 imgresult = img_seg1;
@@ -52,9 +49,6 @@ for i=2:taillex
     end
 end
 
-figure(11)
-imagesc(imgresult),title('segmented 2nd step'),colorbar;colormap('jet');
-
 
 %3eme étape de segmentation, comme l'étape précedente mais le balayage est cette fois ci du haut vers le bas et toujours de droite �  gauche
 for i=2:taillex
@@ -73,9 +67,6 @@ for i=2:taillex
         end
     end
 end
-
-figure(12)
-imagesc(imgresult),title('segmented final'),colorbar;
 
 endfunction
 
