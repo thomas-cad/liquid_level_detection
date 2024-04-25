@@ -32,11 +32,23 @@ img_ero3=filtreEro(img_ero2, 3);
 img_ero4=filtreEro(img_ero3, 3);
 img_ero5=filtreEro(img_ero4, 3);
 img_ero6=filtreEro(img_ero5, 3);
+img_ero7=filtreEro(img_ero6, 3);
+img_ero8=filtreEro(img_ero7, 3);
+img_ero9=filtreEro(img_ero8, 3);
+img_ero10=filtreEro(img_ero9, 3);
 figure(6)
-imshow(img_ero6); title('Image Erodée');
+imshow(img_ero10); title('Image Erodée');
 
-img_seg = segmentation(img_ero6);
+img_reDilat1=filtreDilat(img_ero10, 3);
+img_reDilat2=filtreDilat(img_reDilat1, 3);
+img_reDilat3=filtreDilat(img_reDilat2, 3);
+img_reDilat3=filtreDilat(img_reDilat2, 3);
+img_reDilat4=filtreDilat(img_reDilat3, 3);
 figure(7)
+imshow(img_reDilat4); title('Image re-dilatée');
+
+img_seg = segmentation(img_reDilat4);
+figure(8)
 imagesc(img_seg),title('Image segmentée'),colorbar;
 
 img_num = numerotation(img_seg);
