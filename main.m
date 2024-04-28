@@ -1,31 +1,27 @@
 clear all;
 close all;
 
+%Chargement et redimensionnement image
 img = imread('img_test.jpg');
 img = imresize(img, [500 500]);
-figure(1)
-imshow(img); title('Image origniale');
 
+%Conversion NVG
 img_nvg = rgb2gray(img);
-figure(2)
-imshow(img_nvg); title('Image en nuances de gris');
 
+%Filtre Moyenneur
 img_moy = filtreMoyenneur(img_nvg, 3);
-figure(3)
-imshow(img_moy); title('Image avec filtrage moyenneur');
 
-seuil=90
+%Seuillage
+seuil=90;
 img_seuil=255*(img_moy<seuil);
-figure(4)
-imshow(img_seuil); title('Image seuillée');
 
+%Dilatation Step 1
 img_dilat1=filtreDilat(img_seuil, 3);
 img_dilat2=filtreDilat(img_dilat1, 3);
 img_dilat3=filtreDilat(img_dilat2, 3);
 img_dilat4=filtreDilat(img_dilat3, 3);
-figure(5)
-imshow(img_dilat4); title('Image Dilatée');
 
+%Erosion
 img_ero1=filtreEro(img_dilat4, 3);
 img_ero2=filtreEro(img_ero1, 3);
 img_ero3=filtreEro(img_ero2, 3);
@@ -36,19 +32,33 @@ img_ero7=filtreEro(img_ero6, 3);
 img_ero8=filtreEro(img_ero7, 3);
 img_ero9=filtreEro(img_ero8, 3);
 img_ero10=filtreEro(img_ero9, 3);
-figure(6)
-imshow(img_ero10); title('Image Erodée');
 
+%Dilatation Step 2
 img_reDilat1=filtreDilat(img_ero10, 3);
 img_reDilat2=filtreDilat(img_reDilat1, 3);
 img_reDilat3=filtreDilat(img_reDilat2, 3);
 img_reDilat3=filtreDilat(img_reDilat2, 3);
 img_reDilat4=filtreDilat(img_reDilat3, 3);
-figure(7)
-imshow(img_reDilat4); title('Image re-dilatée');
 
+%Segmentation
 img_seg = segmentation(img_reDilat4);
-figure(8)
-imagesc(img_seg),title('Image segmentée'),colorbar;
 
-img_num = numerotation(img_seg);
+%Recupere les deux etiquettes des deux objets
+obj = numerotation(img_seg);
+
+%Recupere les etiquettes
+liquide = FindLiquide(img_seg, obj(1), obj(2))
+bouchon = FindBouchon(img_seg, obj(1), obj(2))
+
+%Calcule la difference moyenne de hauteur entre le liquide et le bouchon
+diffBouchonLiquide = DiffMoyenneBouchonLiquide (img_seg, liquide, bouchon)
+
+%Calcule hauteur moyenne liquide
+hauteurLiquide = MoyenneHauteurLiquide(img_seg, liquide)
+
+%Pourcentage du remplissage
+pourcentage = hauteurLiquide/diffBouchonLiquide
+
+%Affichage
+message = sprintf('Le remplissage est de : %.2f %', pourcentage);
+msgbox(message, 'Remplissage');
