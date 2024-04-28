@@ -25,4 +25,3 @@ for lig=dec+1 : nblig-dec
 endfor
 
 endfunction
-
