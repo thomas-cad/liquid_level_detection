@@ -58,7 +58,3 @@ hauteurLiquide = MoyenneHauteurLiquide(img_seg, liquide)
 
 %Pourcentage du remplissage
 pourcentage = hauteurLiquide/diffBouchonLiquide
-
-%Affichage
-message = sprintf('Le remplissage est de : %.2f %', pourcentage);
-msgbox(message, 'Remplissage');
