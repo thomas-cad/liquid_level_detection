@@ -42,20 +42,26 @@ img_reDilat4=filtreDilat(img_reDilat3, 3);
 
 %Segmentation
 img_seg = segmentation(img_reDilat4);
-save('img_seg.mat', 'img_seg');
+%save('img_seg.mat', 'img_seg');
 
 %Recupere les deux etiquettes des deux objets
 obj = numerotation(img_seg);
 
 %Recupere les etiquettes
-liquide = FindLiquide(img_seg, obj(1), obj(2))
-bouchon = FindBouchon(img_seg, obj(1), obj(2))
-
-%Calcule la difference moyenne de hauteur entre le liquide et le bouchon
-diffBouchonLiquide = DiffMoyenneBouchonLiquide (img_seg, liquide, bouchon)
+liquide = FindLiquide(img_seg, obj(1), obj(2));
+bouchon = FindBouchon(img_seg, obj(1), obj(2));
 
 %Calcule hauteur moyenne liquide
-hauteurLiquide = MoyenneHauteurLiquide(img_seg, liquide)
+hauteurLiquide = MoyenneHauteurLiquide(img_seg, liquide);
+
+%Calcule la difference moyenne de hauteur entre le liquide et le bouchon
+diffBouchonLiquide = DiffMoyenneBouchonLiquide (img_seg, liquide, bouchon);
 
 %Pourcentage du remplissage
-pourcentage = hauteurLiquide/diffBouchonLiquide
+pourcentage = hauteurLiquide/diffBouchonLiquide;
+
+pourcentage = pourcentage * 100;
+
+%Message
+message = sprintf('Le contenant est rempli à : %.2f%%.', pourcentage);
+msgbox(message, 'Mesure');
