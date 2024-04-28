@@ -15,33 +15,18 @@ img_moy = filtreMoyenneur(img_nvg, 3);
 seuil=60;
 img_seuil=255*(img_moy<seuil);
 
-%Dilatation Step 1
-img_dilat1=filtreDilat(img_seuil, 3);
-img_dilat2=filtreDilat(img_dilat1, 3);
-img_dilat3=filtreDilat(img_dilat2, 3);
-img_dilat4=filtreDilat(img_dilat3, 3);
-
+%Traitement = Ouverture (Erosion puis Dilatation)
 %Erosion
-img_ero1=filtreEro(img_dilat4, 3);
+img_ero1=filtreEro(img_seuil, 3);
 img_ero2=filtreEro(img_ero1, 3);
 img_ero3=filtreEro(img_ero2, 3);
-img_ero4=filtreEro(img_ero3, 3);
-img_ero5=filtreEro(img_ero4, 3);
-img_ero6=filtreEro(img_ero5, 3);
-img_ero7=filtreEro(img_ero6, 3);
-img_ero8=filtreEro(img_ero7, 3);
-img_ero9=filtreEro(img_ero8, 3);
-img_ero10=filtreEro(img_ero9, 3);
 
-%Dilatation Step 2
-img_reDilat1=filtreDilat(img_ero10, 3);
+%Dilatation
+img_reDilat1=filtreDilat(img_ero3, 3);
 img_reDilat2=filtreDilat(img_reDilat1, 3);
-img_reDilat3=filtreDilat(img_reDilat2, 3);
-img_reDilat3=filtreDilat(img_reDilat2, 3);
-img_reDilat4=filtreDilat(img_reDilat3, 3);
 
 %Segmentation
-img_seg = segmentation(img_reDilat4);
+img_seg = segmentation(img_reDilat1);
 %save('img_seg.mat', 'img_seg');
 
 %Recupere les deux etiquettes des deux objets
