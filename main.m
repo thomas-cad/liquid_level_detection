@@ -12,7 +12,7 @@ img_nvg = rgb2gray(img);
 img_moy = filtreMoyenneur(img_nvg, 3);
 
 %Seuillage
-seuil=90;
+seuil=60;
 img_seuil=255*(img_moy<seuil);
 
 %Dilatation Step 1
