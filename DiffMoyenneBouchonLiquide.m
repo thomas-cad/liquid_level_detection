@@ -13,18 +13,18 @@ function value = DiffMoyenneBouchonLiquide (img, liquide, bouchon)
          m = m + 1; %On ajoute '1' à la largeur du bouchon
 
          %On avance dans la colonne jusqu'a la fin du bouchon ou de l'image
-         while img(i,j) != 0 & j < size(img)(2)
+         while img(i,j) != 0 && j < size(img)(2)
            j = j + 1;
          endwhile
 
          %On avance entre la fin du bouchon jusqu'au liquide ou de l'image
-         while img(i,j)!= liquide & j < size(img)(2)
+         while img(i,j)!= liquide && j < size(img)(2)
            n = n + 1; %On ajout '1' à la longueur entre le bouchon et le liquide
            j = j + 1;
          endwhile
 
          %On avance jusqu'a la fin du liquide ou de l'image
-         while img(i,j)!= 0 & j < size(img)(2)
+         while img(i,j)!= 0 && j < size(img)(2)
            n = n + 1; %On ajout '1' à la longueur entre le bouchon et le liquide
            j = j + 1;
          endwhile

@@ -11,7 +11,7 @@ function value = MoyenneHauteurLiquide (img, liquide)
        if img(i,j) == liquide
          m = m + 1; %On ajoute '1' à la largeur du liquide
          %On avance dans la colonne jusqu'a la fin du liquide ou de l'image
-         while img(i,j) != 0 & j < size(img)(2)
+         while img(i,j) != 0 && j < size(img)(2)
            n = n + 1; %On ajout '1' à la hauteur du liquide
            j = j + 1;
          endwhile
