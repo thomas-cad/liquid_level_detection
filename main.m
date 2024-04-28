@@ -42,6 +42,7 @@ img_reDilat4=filtreDilat(img_reDilat3, 3);
 
 %Segmentation
 img_seg = segmentation(img_reDilat4);
+save('img_seg.mat', 'img_seg');
 
 %Recupere les deux etiquettes des deux objets
 obj = numerotation(img_seg);
