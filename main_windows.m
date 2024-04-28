@@ -2,7 +2,7 @@ clear all;
 close all;
 
 %Chargement et redimensionnement image
-img = imread('img_test.jpg');
+img = imread('img_test .jpg');
 subplot(2,4,1)
 imshow(img);title('image originale');
 
